@@ -81,6 +81,28 @@ func isPrime(no int32) bool {
 	return true
 }
 
+func (asi *appService) Greet(stream proto.AppService_GreetServer) error {
+	for {
+		req, err := stream.Recv()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			log.Fatalln(err)
+		}
+		personName := req.GetPerson()
+		msg := fmt.Sprintf("Hi %s, %s!", personName.GetFirstName(), personName.GetLastName())
+		res := &proto.GreetResponse{
+			GreetMessage: msg,
+		}
+		er := stream.Send(res)
+		if er != nil {
+			log.Fatalln(err)
+		}
+	}
+	return nil
+}
+
 func main() {
 	//step - 4 : hosting the service
 	asi := &appService{}
