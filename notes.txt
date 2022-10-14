@@ -63,3 +63,20 @@ GRPC Tools
 
         Verification
             protoc --version
+
+        Steps:
+            1. Define the contracts
+                Service Contract
+                Operation Contract
+                Data Contracts
+            2. Generate the proxy & stub
+            3. Implement the service
+            4. Host the service
+            5. Implement the client
+
+        Communication Patterns
+            1. Request / Response
+            2. Client Streaming
+            3. Server Streaming
+            4. Bidirectional Streaming
+            
