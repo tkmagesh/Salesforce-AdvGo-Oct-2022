@@ -50,7 +50,7 @@ func UpdateATodo(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusNotFound, todo)
 	}
-	c.BindJSON(&todo)
+	c.BindJSON(&todo) //deserialization
 	err1 := repository.UpdateATodo(&todo, id)
 	if err1 != nil {
 		c.AbortWithStatus(http.StatusNotFound)
