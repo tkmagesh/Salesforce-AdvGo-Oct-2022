@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"grpc-demo/proto"
 	"io"
@@ -23,11 +24,32 @@ func (service appService) Add(ctx context.Context, req *proto.AddRequest) (res *
 	y := req.GetY()
 	fmt.Printf("Add : Processing %d and %d\n", x, y)
 	//introduce a 10 second delay to add the numbers and cancel the operation if we receive a cancel request from the client
-	result := x + y
-	res = &proto.AddResponse{
-		Result: result,
+	resultCh := add(x, y)
+LOOP:
+	for {
+		select {
+		case result := <-resultCh:
+			res = &proto.AddResponse{
+				Result: result,
+			}
+			break LOOP
+		case <-ctx.Done():
+			fmt.Println("cancel request received")
+			err = errors.New("cancel request received")
+			break LOOP
+		}
 	}
 	return
+}
+
+func add(x, y int32) <-chan int32 {
+	ch := make(chan int32)
+	go func() {
+		time.Sleep(10 * time.Second)
+		result := x + y
+		ch <- result
+	}()
+	return ch
 }
 
 func (service appService) GeneratePrimes(req *proto.PrimeRequest, serverStream proto.AppService_GeneratePrimesServer) error {

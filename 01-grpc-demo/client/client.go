@@ -37,13 +37,19 @@ func main() {
 
 func doRequestResponse(ctx context.Context, service proto.AppServiceClient) {
 	//cancel the request to the server once the user hits ENTER key
+	cancelCtx, cancel := context.WithCancel(ctx)
+	go func() {
+		fmt.Println("Hit ENTER to cancel...")
+		fmt.Scanln()
+		cancel()
+	}()
 	req := &proto.AddRequest{
 		X: 100,
 		Y: 200,
 	}
-	response, err := service.Add(ctx, req)
+	response, err := service.Add(cancelCtx, req)
 	if err != nil {
-		log.Fatalln()
+		log.Fatalln(err)
 	}
 	fmt.Println(response.GetResult())
 }
