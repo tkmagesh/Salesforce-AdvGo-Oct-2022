@@ -1,0 +1,65 @@
+Magesh Kuppan
+
+Schedule:
+    Tea Break   : 10:30 AM (20 mins)
+    Lunch Break : 12:00 PM (1 hr)
+    Tea Break   : 3:00 PM (20 mins)
+    Wind up     : 5:00 PM
+
+Repository
+    https://github.com/tkmagesh/Salesforce-Advgo-oct-2022
+
+GRPC
+
+
+Interprocess Communication
+    Where?
+    Protocol?
+        Transport (TCP)
+        Application
+            Request & Response
+    Data Format
+
+    CORBA
+
+    Web Services
+        Where ?
+            IP
+        TCP
+        HTTP (Text Friendly)
+        XML
+            SOAP (Simple Object Access Protocol)
+            WSDL
+    
+    Data as a Resource (REST)
+        Where?
+            URL
+        What?
+            GET
+            POST
+            PUT
+            PATCH
+            DELETE
+        Data
+            XML
+            JSON
+
+Microservices
+    
+
+GRPC Tools
+     Installation
+        go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+        go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+
+        (when the above is installed, executables are created in the gopath/bin folder. Make sure this path is set in environment variables)
+
+        Windows
+            Install the binaries from https://github.com/protocolbuffers/protobuf/releases/
+
+        Mac
+            brew install protoc-gen-go
+            brew install protoc-gen-go-grpc
+
+        Verification
+            protoc --version
