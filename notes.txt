@@ -80,3 +80,42 @@ GRPC Tools
             2. Client Streaming
             3. Server Streaming
             4. Bidirectional Streaming
+
+Http Services
+    1. net/http
+    2. 3rd party router libraries
+    3. Web Frameworks
+    4. Microservices Frameworks
+
+
+ServerMux
+/ => index()
+/products => productsHandler()
+/customers => customersHandler()
+
+func productsHandler(res http.ResponseWriter req *http.Request){
+    switch req.Method {
+        case "GET":
+            //get the data from db
+            //serialize the data
+            //send the response
+
+        case "POST":
+            //deserialize the data from the request
+            //process
+            //serialize the response
+            //send the response
+        case "PUT":
+
+    }
+}
+
+router
+router('/products', productsGet).Methods('GET')
+
+Web Frameworks
+    data serialization
+    middlewares
+    logging
+
+Microservices Frameworks
