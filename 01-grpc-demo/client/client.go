@@ -22,7 +22,7 @@ func main() {
 	ctx := context.Background()
 
 	//request & response
-	//doRequestResponse(ctx, service)
+	doRequestResponse(ctx, service)
 
 	//server streaming
 	//doServerStreaming(ctx, service)
@@ -31,11 +31,12 @@ func main() {
 	//doClientStreaming(ctx, service)
 
 	//Bidirectional streaming
-	doBiDiStreaming(ctx, service)
+	//doBiDiStreaming(ctx, service)
 
 }
 
 func doRequestResponse(ctx context.Context, service proto.AppServiceClient) {
+	//cancel the request to the server once the user hits ENTER key
 	req := &proto.AddRequest{
 		X: 100,
 		Y: 200,

@@ -18,9 +18,11 @@ type appService struct {
 }
 
 func (service appService) Add(ctx context.Context, req *proto.AddRequest) (res *proto.AddResponse, err error) {
+
 	x := req.GetX()
 	y := req.GetY()
 	fmt.Printf("Add : Processing %d and %d\n", x, y)
+	//introduce a 10 second delay to add the numbers and cancel the operation if we receive a cancel request from the client
 	result := x + y
 	res = &proto.AddResponse{
 		Result: result,
